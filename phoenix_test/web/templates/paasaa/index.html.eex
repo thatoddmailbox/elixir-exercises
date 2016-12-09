@@ -1,0 +1,4 @@
+<form action="/paasaa/result" method="GET">
+	<input type="text" placeholder="Text" class="form-control" name="text_input">
+	<input type="submit" class="btn btn-primary" />
+</form>

@@ -1,0 +1,20 @@
+<h3>Result</h3>
+<h4><%= @text_input %></h4>
+<table id="result_table">
+	<thead>
+		<tr>
+			<th>Language</th>
+			<th>Score</th>
+		</tr>
+	</thead>
+	<tbody>
+		<%= for item <- @result do %>
+			<tr>
+				<% {lang, score} = item %>
+				<td><%= lang %></td>
+				<td><%= score %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+<a href="/paasaa">&laquo; Go back</a>

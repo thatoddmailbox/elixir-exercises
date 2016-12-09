@@ -1,0 +1,11 @@
+#result_table {
+	width: 100%;
+	border-bottom: solid 1px black;
+}
+#result_table th {
+	border: solid 1px black;
+}
+#result_table td {
+	border-left: solid 1px black;
+	border-right: solid 1px black;
+}

@@ -1,0 +1,75 @@
+<h3>Data</h3>
+
+<table id="result_table">
+	<thead>
+		<tr>
+    		<%= for item <- (@data |> Enum.take(1)) do %>
+    			<%= for col <- item  do %>
+        			<th>
+                        <%= col %>
+    			    </th>
+        		<% end %>
+    		<% end %>
+		</tr>
+	</thead>
+	<tbody>
+		<%= for item <- tl(@data |> Enum.take(25)) do %>
+            <tr>
+                <%= for col <- item  do %>
+                    <td>
+                        <%= col %>
+                    </td>
+                <% end %>
+            </tr>
+		<% end %>
+	</tbody>
+</table>
+<style>
+.container {
+    margin: 0;
+    padding: 0;
+}
+td {
+    border-bottom: solid 1px black;
+}
+</style>
+
+<div id="criticalFlag"></div>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+google.charts.load('current', {'packages':['corechart']});
+
+google.charts.setOnLoadCallback(function() {
+	/*var crit = 1;
+	var not = 0;
+	var raw = [<%= for item <- tl(@data |> Enum.take(5000)) do %><%= cond do
+			Enum.at(item, 12) == "Critical" -> "crit, "
+			true -> "not, "
+		end %><% end %>];*/
+	var critCount = <%= @critical %>;//0;
+	var notCount = <%= @non %>;//0;
+	/*for (var i = 0; i < raw.length; ++i){
+	    if (raw[i] == crit) {
+	        critCount++;
+		} else {
+	        notCount++;
+		}
+	}*/
+	var data = new google.visualization.DataTable();
+	data.addColumn('string', 'Critical flag');
+	data.addColumn('number', 'Count');
+	data.addRows([
+		["Critical", critCount],
+		["Not Critical", notCount]
+	]);
+
+	var options = {
+		'title':'Critical flag',
+	    'width':400,
+	    'height':300
+	};
+
+	var chart = new google.visualization.PieChart(document.getElementById('criticalFlag'));
+	chart.draw(data, options);
+});
+</script>
